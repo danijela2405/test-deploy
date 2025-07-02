@@ -17,7 +17,7 @@ class CommentController extends Controller
     {
        $data = $request->validated();
 
-       $data['user_id'] = Auth::user()->id;
+       $data[] = Auth::user()->id;
 
        $comment  = Comment::create($data);
 

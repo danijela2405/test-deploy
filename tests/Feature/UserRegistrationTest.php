@@ -18,15 +18,17 @@ class UserRegistrationTest extends TestCase
     {
         $response = $this->post('/register',
     [
-        'name'=>'neko ime',
-        'email'=>'email123@email.com',
-        'password'=>'password',
+            'name'=>'neko ime',
+            'email'=>'email123@email.com',
+            'password'=>'password',
         ]);
 
         $user = User::where('email', 'email123@email.com')->first();
 
         $this->assertNotNull( $user);
         $this->assertSame('neko ime', $user->name);
+
+        $response->assertStatus(302);
         $response->assertRedirect('/users');
 
     }
